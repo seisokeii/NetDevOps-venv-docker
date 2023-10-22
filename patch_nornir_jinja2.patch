@@ -1,0 +1,49 @@
+--- /opt/poetry-venv/lib/python3.9/site-packages/nornir_jinja2/plugins/tasks/template_file.py	2023-10-17 15:20:09.091313831 +0000
++++ custom_template_file.py	2023-10-20 15:52:20.709055635 +0000
+@@ -1,3 +1,8 @@
++import json
++import xml.etree.ElementTree as elementTree
++import xml.dom.minidom as minidom
++import re
++
+ from typing import Any, Optional, Dict, Callable
+
+ from nornir.core.task import Result, Task
+@@ -42,4 +47,37 @@
+     t = env.get_template(template)
+     text = t.render(host=task.host, **kwargs)
+
++    res_json = is_json(text)
++    if res_json:
++        data = json.loads(text)
++        reform = json.dumps(data, indent=4)
++
++        return Result(host=task.host, result=reform)
++
++    res_xml = is_xml(text)
++    if res_xml:
++        xml = minidom.parseString(text)
++        reform = xml.toprettyxml(indent="      ")
++        reform = re.sub(r'^<\?xml.*?\?>', '', reform).strip()
++        reform = re.sub(r'\n\s*\n', '\n', reform)
++        reform = re.sub(r'&quot;', '"', reform)
++
++        return Result(host=task.host, result=reform)
++
+     return Result(host=task.host, result=text)
++
++
++def is_json(text):
++    try:
++        json.loads(text)
++    except ValueError as e:
++        return False
++    return True
++
++
++def is_xml(text):
++    try:
++        elementTree.fromstring(text)
++    except elementTree.ParseError as e:
++        return False
++    return True

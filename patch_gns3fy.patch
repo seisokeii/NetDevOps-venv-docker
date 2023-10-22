@@ -1,0 +1,29 @@
+--- /opt/poetry-venv/lib/python3.9/site-packages/gns3fy/gns3fy.py	2023-10-17 15:20:09.285318288 +0000
++++ custom_gns3fy.py	2023-10-20 15:48:25.050664761 +0000
+@@ -655,6 +655,8 @@
+             if v is not None
+         }
+
++        del data['__pydantic_initialised__']
++
+         _response = self.connector.http_call("post", _url, json_data=data)
+
+         # Now update it
+@@ -1016,6 +1018,8 @@
+             if v is not None
+         }
+
++        del data['__pydantic_initialised__']
++
+         _url = (
+             f"{self.connector.base_url}/projects/{self.project_id}/"
+             f"templates/{self.template_id}"
+@@ -1261,6 +1265,8 @@
+             if v is not None
+         }
+
++        del data['__pydantic_initialised__']
++
+         _response = self.connector.http_call("post", _url, json_data=data)
+
+         # Now update it

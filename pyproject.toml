@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "NetDevOps-Images"
+version = "1.0.0"
+description = ""
+authors = ["CSIT_NET_TA <CSIT_NET_TA@cs.nycu.edu.tw>"]
+readme = "README.md"
+#packages = [{include = "{{ Your project name}}"}]  #  For local develope use
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pyats = {version = "23.9", extras = ["full"]}
+nornir = "^3.3.0"
+nornir-jinja2 = "^0.2.0"
+nornir-napalm = "^0.4.0"
+nornir-netmiko = "^1.0.0"
+nornir-netconf = "^2.0.0"
+nornir-scrapli = "^2023.1.30.post1"
+nornir-utils = "^0.2.0"
+nornir-pyez = "^0.2.8"
+nornir-inspect = "^1.0.3"
+nornir-rich = "^0.1.6"
+python-dotenv = "^1.0.0"
+ipdb = "^0.13.13"
+requests = "^2.31.0"
+pyang = "^2.5.3"
+gns3fy = "^0.8.0"
+cryptography = "^41.0.4"
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
