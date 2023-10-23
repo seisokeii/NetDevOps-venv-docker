@@ -2,7 +2,7 @@
 
 此 Image 主要是為了給 Gitlab CI Runner 去跑的環境 (executor)，自己要開發的話也可以使用 pyproject.toml 去安裝對應環境．
 
-## DIFF/PATCH 指令
+## DIFF / PATCH 指令
 
 ### Diff
 
@@ -77,8 +77,8 @@ def template_file(~~~~~
 	t = env.get_template(template)
 	text = t.render(host=task.host, **kwargs)
 
-### 'a 加入以下程式碼到此 function 最下方 'a ###
-	res_json = is_json(text)
+    ### 'a 加入以下程式碼到此 function 最下方 'a ###
+    res_json = is_json(text)
     if res_json:
         data = json.loads(text)
         reform = json.dumps(data, indent=4)
@@ -91,11 +91,12 @@ def template_file(~~~~~
         reform = xml.toprettyxml(indent="      ") # 六個空白輸出會比較好看
         reform = re.sub(r'^<\?xml.*?\?>', '', reform).strip() # 刪除 XML 聲明
         reform = re.sub(r'\n\s*\n', '\n', reform) # 刪除空白行
-				reform = re.sub(r'&quot;', '"', reform) # 把雙引號給轉回來
+        reform = re.sub(r'&quot;', '"', reform) # 把雙引號給轉回來
 
         return Result(host=task.host, result=reform)
-### 'a 以上是要加入的程式碼 'a ###
+    ### 'a 以上是要加入的程式碼 'a ###
 	return Result(host=task.host, result=text) # 這行是原始的不用加
+
 
 def is_json(text):
     try:
