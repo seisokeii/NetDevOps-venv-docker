@@ -95,7 +95,8 @@ def template_file(~~~~~
 
         return Result(host=task.host, result=reform)
     ### 'a 以上是要加入的程式碼 'a ###
-	return Result(host=task.host, result=text) # 這行是原始的不用加
+
+    return Result(host=task.host, result=text) # 這行是原始的不用加
 
 
 def is_json(text):
